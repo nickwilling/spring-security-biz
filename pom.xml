@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>login</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>login</name>
-	<description>Login project for Spring Security</description>
+	<name>biz</name>
+	<description>Biz project for Spring Security</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>
