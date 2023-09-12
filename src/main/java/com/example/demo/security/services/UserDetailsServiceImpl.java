@@ -40,4 +40,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     return UserDetailsImpl.build(user,roles);
   }
 
+  @Transactional
+  public UserDetails loadUserByUserId(Long userId) throws UsernameNotFoundException {
+    User user = userDAO.getUserById(userId)
+            .orElseThrow(() -> new InternalAuthenticationServiceException("User Not Found with userId: " + userId));
+    List<UserRole> roleList = userRoleDAO.getUserRoleByUserId(userId);
+    List<Role> roles = new ArrayList<>();
+    if (roleList.size() > 0) {
+      List<Long> roleIds = roleList.stream().map((UserRole::getRoleId)).toList();
+      roles = roleDAO.findByIdList(roleIds);
+    }
+    return UserDetailsImpl.build(user,roles);
+  }
+
 }

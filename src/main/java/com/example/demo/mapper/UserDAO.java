@@ -34,6 +34,20 @@ public interface UserDAO {
             @Result(property = "updateUser", column = "update_user"),
             @Result(property = "delFlag", column = "del_flag")
     })
+    @Select("select * from sys_users where user_id= #{userId}")
+    Optional<User> getUserById(Long userId);
+    @Results({
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "loginName", column = "login_name"),
+            @Result(property = "userName", column = "user_name"),
+            @Result(property = "loginIp", column = "login_ip"),
+            @Result(property = "loginDate", column = "login_date"),
+            @Result(property = "addTime", column = "add_time"),
+            @Result(property = "addUser", column = "add_user"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "updateUser", column = "update_user"),
+            @Result(property = "delFlag", column = "del_flag")
+    })
     @Select("select * from sys_users where phone=#{username} or email=#{username} ")
     Optional<User> getUserByUserName(String username);
 

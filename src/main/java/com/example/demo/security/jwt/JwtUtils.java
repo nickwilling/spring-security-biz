@@ -28,7 +28,7 @@ public class JwtUtils {
 
   @Value("${bezkoder.app.jwtCookieName}")
   private String jwtCookie;
-
+// 只验证token
   public String getJwtFromCookies(HttpServletRequest request) {
     Cookie cookie = WebUtils.getCookie(request, jwtCookie);
     if (cookie != null) {
@@ -37,7 +37,6 @@ public class JwtUtils {
       return null;
     }
   }
-
   public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
     String jwt = generateTokenFromUsername(userPrincipal.getPhone());
     ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
